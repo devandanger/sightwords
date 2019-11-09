@@ -34,7 +34,7 @@ class ListPageState extends State<ListPage> {
                             onTap: () {
                                Navigator.push(
                                  context,
-                                 MaterialPageRoute(builder: (context) => QuizPage()),
+                                 MaterialPageRoute(builder: (context) => QuizPage(document.data['word'])),
                                  );
                             },
                             child: Text(document.data['word'], style: TextStyle(fontSize: 20)),

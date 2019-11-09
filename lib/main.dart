@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:sightwords/db/models/word.dart';
 import 'package:sightwords/ui/ListPage.dart';
 import 'db/firebase_database_util.dart';
 import 'dart:developer' as developer;
@@ -52,7 +49,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _anchorToBottom = false;
   FirebaseDatabaseUtil databaseUtil;
 
   @override
