@@ -15,35 +15,35 @@ class ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-          padding: const EdgeInsets.all(10.0),
-          child: StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance.collection('words')
-              .snapshots(),
-            builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError)
-                  return new Text('Error: ${snapshot.error}');
-                switch (snapshot.connectionState) {
-                  case ConnectionState.waiting:
-                    return new Text('Loading...');
-                  default:
-                    return new ListView(
-                      children: snapshot.data.documents
-                        .map((DocumentSnapshot document) {
-                          return GestureDetector(
-                            onTap: () {
-                               Navigator.push(
-                                 context,
-                                 MaterialPageRoute(builder: (context) => QuizPage(document.data['word'])),
-                                 );
-                            },
-                            child: Text(document.data['word'], style: TextStyle(fontSize: 20)),
-                          );
-                      }).toList(),
-                    );
-                }
-              },
-            ),
-          );
+      padding: const EdgeInsets.all(10.0),
+      child: StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection('words')
+          .snapshots(),
+        builder: (BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError)
+              return new Text('Error: ${snapshot.error}');
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return new Text('Loading...');
+              default:
+                return new ListView(
+                  children: snapshot.data.documents
+                    .map((DocumentSnapshot document) {
+                      return GestureDetector(
+                        onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => QuizPage(document.data['word'])),
+                              );
+                        },
+                        child: ListTile(title: Text(document.data['word'], style: TextStyle(fontSize: 20)))
+                      );
+                  }).toList(),
+                );
+            }
+          },
+        ),
+      );
   }
 }
